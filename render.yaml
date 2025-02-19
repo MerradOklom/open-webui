@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: openwebui
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_APP
+        value: app:app
+      - key: FLASK_RUN_HOST
+        value: 0.0.0.0
+      - key: FLASK_RUN_PORT
+        value: 8000
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:8000 --workers 4
+    runtime: python3
